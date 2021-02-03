@@ -1,0 +1,9 @@
+.note {
+  display: block !important;
+}
+.note-name {
+  display: inline-flex;
+}
+.note-desc {
+  display: block !important;
+}
