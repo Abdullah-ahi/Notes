@@ -3,6 +3,7 @@ import { TextField, List, ListItem, ListItemText, Button } from '@material-ui/co
 import './notes.css'
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import classNames from 'classnames';
 import moment from 'moment';
@@ -14,7 +15,6 @@ export class Notes extends Component {
     description: '',
     lastDesc: '',
     editBtnsIsVisible: false,
-    noteDate: moment().format('lll'),
     formIsVisible: false,
     formOpenBtnVisible: true,
 
@@ -29,7 +29,7 @@ export class Notes extends Component {
   addNote = () => {
     const { name, description } = this.state
     const { addNote, id } = this.props
-    addNote({id, name, description})
+    addNote({id, name, description, timestamp: new Date()})
     this.setState({
       name: '',
       description: '',
@@ -73,9 +73,9 @@ export class Notes extends Component {
   }
   handleEditDescription = (id, name) => {
     const { description, lastDesc } = this.state;
-    const { addNote } = this.props
+    const { edit } = this.props
     if (description.length){
-      addNote({id, name, description})
+      edit({id, name, description, timestamp: new Date()})
     }
     this.setState({
       editBtnsIsVisible: false,
@@ -106,9 +106,17 @@ export class Notes extends Component {
       formIsVisible: false,
     })
   }
+  removeNote = (id) => {
+    const { remove } = this.props;
+    remove(id)
+    this.setState({
+      formOpenBtnVisible: true,
+    })
+  }
   render(){
-    const { name, description, editBtnsIsVisible, formIsVisible, formOpenBtnVisible, noteDate } = this.state
-    const { notes } = this.props
+    const { name, description, editBtnsIsVisible, formIsVisible, formOpenBtnVisible } = this.state
+    const { notes } = this.props;
+    console.log(notes)
     const editBtnsClasses = classNames('desc-edit-btns', {
       'hide': !editBtnsIsVisible
     })
@@ -127,9 +135,10 @@ export class Notes extends Component {
               <ListItem className='note' key={idx}>
                 <div className="note-data">
                   <ListItemText className='note-name' primary={note.name}/>
-                  <p className="noteDate">{noteDate}</p>
+                  <p className="noteDate">{moment(note.timestamp).format('lll')}</p>
                   <p className='note-time-interval'>{moment(note.timestamp).fromNow()}</p>
                 </div>
+                <DeleteIcon className='note-delete-icon' fontSize='default' onClick={() => this.removeNote(idx)}/>
                 <Button onClick={() => this.showDescription(note.id, note.description)} className='open-note-btn' variant="outlined" color="secondary">Открыть</Button>
                 <div data-id={note.id} className='note-desc show-desc'>
                   <div className='desc-controls-icons'>
@@ -138,7 +147,7 @@ export class Notes extends Component {
                   </div>
                   <TextField name='description' onChange={this.handleInputChange} multiline={true} className='note-desc-input'/>
                   <div className={editBtnsClasses}>
-                    <Button onClick={() => this.handleEditDescription(note.id, note.name)}>Сохранить</Button>
+                    <Button onClick={() => this.handleEditDescription(idx, note.name)}>Сохранить</Button>
                     <Button onClick={() => this.handleCancelEdit(note.description)}>Отмена</Button>
                   </div>
                 </div>

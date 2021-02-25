@@ -36,6 +36,14 @@
 .note-desc {
   display: none !important;
 }
+.note-desc-input {
+  width: 70%;
+  border: 1px solid black !important;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  max-height: 180px;
+}
 .desc-close-icon{
   align-self: flex-end;
 }
@@ -47,6 +55,13 @@
 .hide {
   display: none !important;
 }
+.note-delete-icon {
+  position: absolute;
+  right: 16%;
+  top: 15%;
+}
 .open-note-btn {
-  margin-left: 76% !important;
+  position: absolute !important;
+  top: 11%;
+  right: 4%;
 }
