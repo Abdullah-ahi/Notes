@@ -168,4 +168,3 @@ export class Notes extends Component {
     )
   }
 }
-//Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa sint laudantium molestiae fugiat mollitia obcaecati, ex quod expedita voluptatem officia optio debitis eum excepturi. Assumenda voluptatum nam delectus dicta!
