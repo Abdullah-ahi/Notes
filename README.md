@@ -1,8 +1,8 @@
 # Notes
 #The application, where you can add, edit and delete notes
 
-Установите модули командой "npm i"
-
-Проект запускается на двух разных портах. Сервер обязательно запускается на localhost:3000, т.к. с клиента запрос идет на этот сервер. Для начала нужно открыть два терминала, в одном ввести команду «node server», для запуска сервера, а в другом команду «npm run dev» После введения последней команды проект запустится и в терминале будет выведен порт, на котором проект запущен.
+<code>npm i</code> to install modules
+<code>npm run dev</code> to run project
+<code>node server</code> to run server
 
 При разработке использовался React (frontend) и Node.js(backend).
